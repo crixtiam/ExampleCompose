@@ -35,12 +35,13 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
+//Function that do somethings
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(text = "Hello $name!", modifier = modifier)
 }
 
+//Configure the view
 @Preview(showBackground = true,
     name = "Android Theme",
     widthDp = 400,
