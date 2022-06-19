@@ -10,6 +10,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.modifier.modifierLocalConsumer
@@ -34,8 +35,8 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(text = "Hello $name!", modifier = modifier)
 }
 
 @Preview(showBackground = true,
@@ -48,12 +49,13 @@ fun Greeting(name: String) {
 fun DefaultPreview() {
     ExampleComposeTheme {
         Box(
-            modifier= Modifier.fillMaxSize().background(Color.Yellow)
+            modifier= Modifier.fillMaxSize().background(Color.Yellow),
+            contentAlignment = Alignment.Center
         ){
             Greeting("Android")
-            Greeting("Cristiam")
+            Greeting("Cristiam", modifier = Modifier.align(Alignment.BottomEnd))
 
         }
-        Greeting("Android")
+        //Greeting("Android")
     }
 }
