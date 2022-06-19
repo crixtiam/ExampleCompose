@@ -50,7 +50,7 @@ fun DefaultPreview() {
         Box(
             modifier= Modifier.fillMaxSize().background(Color.Yellow)
         ){
-            Greeting("Android")
+            Greeting("fff")
             Greeting("Cristiam")
 
         }
