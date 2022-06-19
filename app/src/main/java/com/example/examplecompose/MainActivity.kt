@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -48,13 +50,20 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun DefaultPreview() {
     ExampleComposeTheme {
-        Box(
-            modifier= Modifier.fillMaxSize().background(Color.Yellow),
-            contentAlignment = Alignment.Center
+        //Similar to reciclerView
+        Column(
+            modifier= Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.SpaceAround,
+            horizontalAlignment = Alignment.CenterHorizontally
         ){
-            Greeting("Android")
-            Greeting("Cristiam", modifier = Modifier.align(Alignment.BottomEnd))
+            Greeting("Android", Modifier
+                .background(Color.Yellow))
 
+            Greeting("Cristiam", Modifier
+                .background(Color.Blue))
+
+            Greeting(name = "Garras", Modifier
+                .background(Color.LightGray))
         }
         //Greeting("Android")
     }
