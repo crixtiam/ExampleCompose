@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -28,7 +30,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Cristiam")
+                    ButtonText()
                 }
             }
         }
@@ -51,9 +53,41 @@ fun MediaItem(){
         ) {
             
         }
-        Text(text = "Title 1")
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colors.secondary)
+            .padding(16.dp)
+        ){
+            Text(text = "Title 1")
+        }
+
     }
 }
+
+@Preview(showBackground = true, widthDp = 200, heightDp = 100)
+@Composable
+fun ButtonText(){
+    Box(
+
+        modifier = Modifier
+            .background(color = Color.LightGray)
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(text = "Hello World",
+             modifier = Modifier
+                 .clickable { /*TODO*/ }
+                 .background(Color.Yellow)
+                 .border(2.dp, color = Color.Blue)
+                 .padding(horizontal = 16.dp, vertical = 8.dp)
+        )
+
+    }
+}
+
+
 //Function that do somethings
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
