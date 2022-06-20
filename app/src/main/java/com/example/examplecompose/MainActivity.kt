@@ -1,5 +1,6 @@
 package com.example.examplecompose
 
+import android.graphics.Paint
 import android.media.browse.MediaBrowser
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,23 +9,35 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.PlayCircle
+import androidx.compose.material.icons.filled.PlayCircleOutline
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.fontResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import coil.transform.CircleCropTransformation
 import com.example.examplecompose.ui.theme.ExampleComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -38,7 +51,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     ButtonText()
-                    TextDesign()
+                    //TextDesign()
                 }
             }
         }
@@ -59,7 +72,25 @@ fun MediaItem(){
                 .fillMaxWidth()
                 .background(color = Color.LightGray)
         ) {
-            
+            AsyncImage(model = ImageRequest.Builder(LocalContext.current)
+                .data("https://loremflickr.com/320/240/dog")
+                .crossfade(2000)
+                //.transformations(CircleCropTransformation())
+                .build(),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+
+            )
+
+            Icon(imageVector = Icons.Default.PlayCircleOutline,
+                contentDescription = null,
+                modifier = Modifier
+                    .size(92.dp)
+                    .align(Alignment.Center),
+                tint = Color.White)
+                Icon(painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                contentDescription = null)
         }
         Box(
             contentAlignment = Alignment.Center,
@@ -95,7 +126,7 @@ fun ButtonText(){
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, widthDp = 400, heightDp = 100)
 @Composable
 fun TextDesign(){
     Box(
