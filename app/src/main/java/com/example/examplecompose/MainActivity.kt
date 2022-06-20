@@ -114,6 +114,7 @@ fun TextDesign(){
                     offset = Offset(10f,10f),
                     blurRadius = 10f,
                     color = Color.Blue.copy(alpha = 0.5f)
+
                 )
             )
         )
