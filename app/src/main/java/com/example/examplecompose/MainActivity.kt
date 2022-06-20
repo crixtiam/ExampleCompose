@@ -14,8 +14,15 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.res.fontResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.examplecompose.ui.theme.ExampleComposeTheme
@@ -31,6 +38,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     ButtonText()
+                    TextDesign()
                 }
             }
         }
@@ -56,9 +64,9 @@ fun MediaItem(){
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colors.secondary)
-            .padding(16.dp)
+                .fillMaxWidth()
+                .background(MaterialTheme.colors.secondary)
+                .padding(16.dp)
         ){
             Text(text = "Title 1")
         }
@@ -87,10 +95,37 @@ fun ButtonText(){
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun TextDesign(){
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ){
+        Text(text = "Example Text",
+            fontWeight = FontWeight.ExtraBold,
+            fontFamily = FontFamily.Monospace,
+            textAlign = TextAlign.Right,
+            maxLines = 1,
+            softWrap = true,
+            overflow = TextOverflow.Ellipsis,
+            style = MaterialTheme.typography.h4.copy(
+                shadow = Shadow(
+                    offset = Offset(10f,10f),
+                    blurRadius = 10f,
+                    color = Color.Blue.copy(alpha = 0.5f)
+                )
+            )
+        )
+    }
+}
+
+
 
 //Function that do somethings
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(text = "Hello $name!", modifier = modifier)
 }
+
 
