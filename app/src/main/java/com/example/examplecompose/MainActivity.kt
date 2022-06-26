@@ -3,14 +3,9 @@ package com.example.examplecompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.*
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -40,6 +35,7 @@ import coil.request.ImageRequest
 import com.example.examplecompose.ui.theme.ExampleComposeTheme
 
 class MainActivity : ComponentActivity() {
+    @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -58,15 +54,17 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@ExperimentalFoundationApi
 @Preview(showBackground = true)
 @Composable
 fun MediaList(){
-    LazyRow(
+    LazyVerticalGrid(
         contentPadding = PaddingValues(4.dp),
-        horizontalArrangement = Arrangement.spacedBy(4.dp)
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        cells = GridCells.Adaptive(150.dp)
     ){
         items(getMedia()){itemx->
-            MediaListItem(itemx)
+            MediaListItem(itemx,Modifier.padding(2.dp))
 
         }
     }
@@ -74,9 +72,9 @@ fun MediaList(){
 
 //@Preview(showBackground = true)
 @Composable
-fun MediaListItem(item: MediaItem) {
+fun MediaListItem(item: MediaItem, modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier.width(200.dp)
+        modifier = modifier
     ) {
         Box(
             modifier = Modifier
