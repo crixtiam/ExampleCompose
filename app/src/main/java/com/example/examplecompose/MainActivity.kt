@@ -46,7 +46,16 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    StateSample()
+                    //var text by rememberSaveable() {mutableStateOf("") }
+                    // para devolver getter y setter
+                    val (value, onValueChange) = rememberSaveable() {
+                        mutableStateOf("")
+                    }
+
+                    StateSample(
+                        value=value,
+                        onValueChange = onValueChange
+                    )
 
                 }
             }
@@ -54,9 +63,8 @@ class MainActivity : ComponentActivity() {
     }
 }
 //state commit 11
-@Preview(showBackground = true)
 @Composable
-fun StateSample(){
+fun StateSample(value: String, onValueChange:(String)->Unit){
     //otra forma
     // debemos importar  import androix.composable.runtime.*
     //setter and getter verificar si los importa el runtime
@@ -64,19 +72,18 @@ fun StateSample(){
     // reemplazar text.value por text ... OK
     //val text = remember(){ mutableStateOf("")}
     //statehosting extraer estado de las vistas
-    val text = rememberSaveable(){ mutableStateOf("")}
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(64.dp)
     ) {
-        TextField(value = text.value,
-            onValueChange = {text.value = it},
+        TextField(value = value,
+            onValueChange = {onValueChange(it)},
             modifier = Modifier.fillMaxWidth()
         )
         
         Text(
-            text = text.value,
+            text = value,
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.Yellow)
@@ -84,9 +91,9 @@ fun StateSample(){
         )
         
         Button(
-            onClick = { text.value = ""},
+            onClick = { onValueChange("")},
             modifier = Modifier.fillMaxWidth(),
-            enabled = text.value.isNotEmpty()
+            enabled = value.isNotEmpty()
         ) {
             Text("Clear")
         }
