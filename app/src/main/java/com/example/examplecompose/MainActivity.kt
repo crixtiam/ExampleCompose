@@ -9,6 +9,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -60,9 +61,9 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun MediaList(){
-    LazyColumn(
+    LazyRow(
         contentPadding = PaddingValues(4.dp),
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+        horizontalArrangement = Arrangement.spacedBy(4.dp)
     ){
         items(getMedia()){itemx->
             MediaListItem(itemx)
@@ -74,15 +75,12 @@ fun MediaList(){
 //@Preview(showBackground = true)
 @Composable
 fun MediaListItem(item: MediaItem) {
-    Column() {
+    Column(
+        modifier = Modifier.width(200.dp)
+    ) {
         Box(
-            //Modifier de posicionamiento
-            //Modifier de funcionalidad
-            //Modifier de diseno
-            //Modifier de listeners
             modifier = Modifier
                 .height(200.dp)
-                .fillMaxWidth()
                 .background(color = Color.LightGray)
         ) {
             AsyncImage(model = ImageRequest.Builder(LocalContext.current)
