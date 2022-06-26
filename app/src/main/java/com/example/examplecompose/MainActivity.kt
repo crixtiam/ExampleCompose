@@ -6,13 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayCircleOutline
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -27,6 +26,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
@@ -45,17 +46,57 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MediaList()
-                    //ButtonText()
-                    //TextDesign()
+                    StateSample()
+
                 }
             }
         }
     }
 }
-
-@ExperimentalFoundationApi
+//state commit 11
 @Preview(showBackground = true)
+@Composable
+fun StateSample(){
+    //otra forma
+    // debemos importar  import androix.composable.runtime.*
+    //setter and getter verificar si los importa el runtime
+    //var text by remember{mutableStateOf("")}
+    // reemplazar text.value por text ... OK
+    //val text = remember(){ mutableStateOf("")}
+    //statehosting extraer estado de las vistas
+    val text = rememberSaveable(){ mutableStateOf("")}
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(64.dp)
+    ) {
+        TextField(value = text.value,
+            onValueChange = {text.value = it},
+            modifier = Modifier.fillMaxWidth()
+        )
+        
+        Text(
+            text = text.value,
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.Yellow)
+                .padding(8.dp)
+        )
+        
+        Button(
+            onClick = { text.value = ""},
+            modifier = Modifier.fillMaxWidth(),
+            enabled = text.value.isNotEmpty()
+        ) {
+            Text("Clear")
+        }
+    }
+}
+
+
+/// No va
+@ExperimentalFoundationApi
+//@Preview(showBackground = true)
 @Composable
 fun MediaList(){
     LazyVerticalGrid(
@@ -119,7 +160,7 @@ fun MediaListItem(item: MediaItem, modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun MediaItem(){
     Column() {
@@ -166,7 +207,7 @@ fun MediaItem(){
     }
 }
 
-@Preview(showBackground = true, widthDp = 200, heightDp = 100)
+//@Preview(showBackground = true, widthDp = 200, heightDp = 100)
 @Composable
 fun ButtonText(){
     Box(
@@ -187,7 +228,7 @@ fun ButtonText(){
     }
 }
 
-@Preview(showBackground = true, widthDp = 400, heightDp = 100)
+//@Preview(showBackground = true, widthDp = 400, heightDp = 100)
 @Composable
 fun TextDesign(){
     Box(
